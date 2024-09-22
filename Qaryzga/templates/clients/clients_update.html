@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+	<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock link %}
+
+{% block title %}Изменение клиента {{ client.phone_number }}{% endblock title %}
+
+{% block body %}
+	<button class="back" onclick="history.back()">←</button>
+	<div class="center">
+		<form method="post">
+			<h1>Изменение клиента <br> {{ client.phone_number }}</h1>
+			{% csrf_token %}
+			{{ form.as_table }}
+			<button type="submit">Сохранить</button>
+		</form>
+	</div>
+{% endblock body %}

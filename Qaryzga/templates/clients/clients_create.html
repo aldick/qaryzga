@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+	<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock link %}
+
+{% block title %}Новый клиент{% endblock title %}
+
+{% block body %}
+	<button class="back" onclick="history.back()">←</button>
+	<div class="center">
+		
+		<form method="post">
+			<h1>Создание нового клиента</h1>
+			{% csrf_token %}
+
+			{{ form.as_table }}
+			<button type="submit">Создать</button>
+		</form>
+	</div>
+{% endblock body %}

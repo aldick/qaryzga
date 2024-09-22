@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<button onclick="history.back()" class="back">←</button>
+
+<div class="center">
+	<h1>Удалить клиента</h1>
+
+	<p>Вы точно хотите удалить этот заказ?
+
+	<form action="" method="post">
+	{% csrf_token %}
+	<button type="submit">Удалить</button>
+	</form>
+</div>
+{% endblock body %}

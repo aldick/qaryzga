@@ -1,0 +1,22 @@
+{% comment %} {% extends "base.html" %} {% endcomment %}
+{% load static %}
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% block link %}
+  	<link rel="stylesheet" href="{% static 'css/base.css' %}">
+	<link rel="stylesheet" href="{% static 'css/form.css' %}">
+	<link rel="stylesheet" href="{% static 'css/clients_login.css' %}">
+{% endblock link %}
+
+{% comment %} {% block title %}Войти в систему{% endblock title %} {% endcomment %}
+
+{% block body %}
+  <div class="center">
+    <form method="post">
+		<h1>Войти в систему</h1>
+		{{ form.as_table }}
+		{% csrf_token %}
+		<button type="submit" value="Log in">Войти</button>
+    </form>
+  </div>
+{% endblock body %}

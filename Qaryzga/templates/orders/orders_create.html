@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+	<link rel="stylesheet" href="{% static 'css/form.css' %}">
+{% endblock link %}
+
+{% block title %}
+	Создание заказа
+{% endblock title %}
+
+{% block body %}
+	<div class="center">
+		<form method="post">
+			<h1>Создание нового заказа</h1>
+			{% csrf_token %}
+			{{ form.as_table }}
+			<button type="submit">Создать</button>
+		</form>
+	</div>
+{% endblock body %}

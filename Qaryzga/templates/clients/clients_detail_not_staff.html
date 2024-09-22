@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Клиент {{ client.phone_number }}</title>
+	<link rel="stylesheet" href="{% static 'css/base.css' %}">
+	<link rel="stylesheet" href="{% static 'css/clients_detail.css' %}">
+</head>
+<body>
+	<header>
+		<p class="header-logo">Q</p>
+		<span class="header-user">
+			<img class="header-user-img" src="../../static/img/user-logo.jpg"> 
+			{% if request.user.is_authenticated %}
+				{% comment %} <a href="{% url 'clients_detail' request.user.username %}">+{{ request.user.username }}</a> {% endcomment %}
+			 	<a href="{% url "clients_logout" %}">Выйти</a>
+			{% else %}
+			 	<a href="{% url "clients_login" %}">Войти</a>
+			{% endif %}
+		</span>
+	</header>
+	<div class="main">
+		<h1>Клиент +{{ client.phone_number }}</h1>
+
+		<p><b>Имя: </b>{{ client.name }}</p>
+		<p><b>Номер телефона: +</b>{{ client.phone_number }}</p>
+		{% comment %} <p><b>Последний адрес доставки: </b>{{ client.address }}</p> {% endcomment %}
+		<p><b>Общая сумма заказов: </b>{{ total_sum }}</p>
+
+		<br>
+
+		<h1>Заказы:</h1>
+		<table>
+			<tr>
+				<th>ID</th>
+				<th>Дата</th>
+				{% comment %} <th>Адрес</th> {% endcomment %}
+				<th>Сумма</th>
+			</tr>
+
+			{% for order in orders %}
+				{% if forloop.counter0|divisibleby:2 %}
+				<tr class="white">
+					<td>{{ order.id }}</td>
+					<td>{{ order.created_at|date:"j.m.Y Время: H:i" }}</td>
+					{% comment %} <td>{{ order.address }}</td> {% endcomment %}
+					<td>{{ order.get_total_cost }}</td>
+				</tr>
+				{% else %}
+				<tr class="gray">
+					<td>{{ order.id }}</td>
+					<td>{{ order.created_at|date:"j.m.Y Время: H:i" }}</td>
+					{% comment %} <td>{{ order.address }}</td> {% endcomment %}
+					<td>{{ order.get_total_cost }}</td>
+				</tr>
+				{% endif %}
+			{% endfor %}
+		</table>
+	</div>
+</body>
+</html>
